@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StayFlow · Hotel booking</title>
+<style>
+:root{--ink:#172033;--muted:#64748b;--line:#e5e7eb;--blue:#2563eb;--bg:#f7f9fc}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui;background:var(--bg);color:var(--ink)}
+a{text-decoration:none;color:inherit}.nav{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:4}
+.brand{font-size:24px;font-weight:900;color:#1d4ed8}.nav a{padding:10px 16px;border-radius:10px}.login{background:#1d4ed8;color:white}
+.hero{max-width:1280px;margin:28px auto;padding:62px 7%;border-radius:28px;background:linear-gradient(120deg,#172554,#2563eb);color:white}
+.hero h1{font-size:52px;max-width:700px;line-height:1.05;margin:0 0 14px}.hero p{font-size:18px;color:#dbeafe;max-width:680px}
+.wrap{max-width:1280px;margin:auto;padding:0 24px 50px}.section-head{display:flex;justify-content:space-between;align-items:end;margin:35px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 25px #0f172a0a}
+.cover{height:220px;width:100%;object-fit:cover;background:linear-gradient(135deg,#dbeafe,#e2e8f0);display:block}
+.body{padding:18px}.stars{color:#f59e0b}.muted{color:var(--muted)}.badge{display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:700;margin-top:10px}
+.hotel-link{display:block}.hotel-link:hover{transform:translateY(-2px)}.hotel-link{transition:.2s}.cta{display:flex;gap:8px;margin-top:14px}.cta a{background:var(--blue);color:#fff;padding:11px 14px;border-radius:10px;font-weight:800}
+@media(max-width:900px){.hero{margin:18px 16px;padding:42px 28px}.hero h1{font-size:40px}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.hero h1{font-size:34px}.nav{padding:0 18px}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="brand">StayFlow</div>
+  <div><a href="#hotels">Hotels</a> <a class="login" href="/login">Sign in</a></div>
+</header>
+
+<section class="hero">
+  <h1>Find stays you'll love.</h1>
+  <p>Browse hotels first, open any property to see every room, room count, amenities and availability.</p>
+</section>
+
+<main class="wrap" id="hotels">
+  <div class="section-head">
+    <div><h2>Popular hotels</h2><div class="muted">Click a hotel to see its complete room inventory.</div></div>
+  </div>
+
+  <div class="grid">
+  {% for h in hotels %}
+    <a class="hotel-link" href="{{ url_for('hotel_detail', hotel_id=h.id) }}">
+      <article class="card">
+        {% if h.image %}
+          <img class="cover" src="{{ url_for('public_media', filename=h.image) }}" alt="{{ h.name }} hotel">
+        {% else %}
+          <div class="cover" aria-label="Hotel image unavailable"></div>
+        {% endif %}
+        <div class="body">
+          <div class="stars">★ {{ "%.1f"|format(h.rating or 4.5) }}</div>
+          <h3>{{ h.name }}</h3>
+          <div class="muted">{{ h.location }}</div>
+          <p>{{ h.description or 'A comfortable StayFlow property with thoughtfully managed rooms.' }}</p>
+          <span class="badge">{{ h.room_count or 0 }} total rooms · {{ h.available_count or 0 }} available</span>
+          <div class="cta"><span>View rooms →</span></div>
+        </div>
+      </article>
+    </a>
+  {% else %}
+    <p class="muted">Hotels will appear here once an administrator adds them.</p>
+  {% endfor %}
+  </div>
+</main>
+</body>
+</html>

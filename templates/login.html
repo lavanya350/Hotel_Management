@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StayFlow · Sign in</title><style>body{margin:0;background:linear-gradient(135deg,#eff6ff,#f8fafc);font-family:Inter,system-ui;color:#172033;min-height:100vh;display:grid;place-items:center}.box{width:min(420px,calc(100% - 32px));background:white;border:1px solid #e5e7eb;border-radius:24px;padding:34px;box-shadow:0 25px 60px #0f172a12}h1{margin:0}.brand{color:#2563eb;font-weight:900;font-size:25px;margin-bottom:28px}.sub{color:#64748b}label{display:block;font-size:13px;margin:16px 0 6px;color:#64748b}input,button{width:100%;padding:13px;border-radius:10px;border:1px solid #e5e7eb;font:inherit}button{margin-top:18px;background:#2563eb;color:#fff;border:0;font-weight:800}.error{background:#fee2e2;color:#991b1b;padding:12px;border-radius:10px}.demo{margin-top:20px;background:#f8fafc;padding:14px;border-radius:12px;color:#475569;font-size:13px}
+
+/* Responsive polish: prevent text collisions and improve touch/mobile layouts */
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden}
+h1,h2,h3,p,small,td,th,label,.muted,.badge,.pill{overflow-wrap:anywhere;word-break:break-word}
+button,input,select,textarea{min-width:0;max-width:100%}
+button{min-height:42px;line-height:1.25;white-space:normal}
+textarea{resize:vertical;line-height:1.4}
+input,select{line-height:1.35}
+.panel,.card,.stat,.booking,.body,.formgrid,.grid,.layout,main,aside{min-width:0}
+.tablewrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+table{table-layout:auto}
+th,td{overflow-wrap:anywhere;word-break:break-word}
+.actions{min-width:0}
+.inline{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.inline>*{min-width:0;flex:1 1 140px}
+.inline button{flex:0 1 auto}
+form{min-width:0}
+@media(max-width:1200px){
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .hero{gap:16px;flex-wrap:wrap}
+}
+@media(max-width:900px){
+  .top,.nav{height:auto;min-height:68px;gap:12px;flex-wrap:wrap;padding:14px 20px!important}
+  .top>div,.nav>div{min-width:0}
+  main,.wrap{padding:20px!important}
+  .grid{grid-template-columns:1fr!important}
+  .formgrid{grid-template-columns:1fr!important}
+  .full{grid-column:auto!important}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .search{grid-template-columns:1fr!important}
+  .hero{padding:28px!important;margin-left:0;margin-right:0}
+  .hero h1{font-size:clamp(30px,7vw,44px)!important}
+  .section-head{align-items:flex-start;gap:12px;flex-wrap:wrap}
+}
+@media(max-width:600px){
+  .brand{font-size:20px!important}
+  .top>div:last-child,.nav>div:last-child{font-size:13px}
+  .stats{grid-template-columns:1fr!important}
+  .stat b{font-size:24px}
+  .panel{padding:15px!important;border-radius:14px}
+  .card .body{padding:14px}
+  .cover{height:190px!important}
+  .booking{display:grid;grid-template-columns:1fr!important;gap:12px!important;padding:16px 0!important}
+  .dates{display:grid!important;grid-template-columns:1fr!important}
+  .dates input{width:100%!important}
+  .inline{display:grid!important;grid-template-columns:1fr!important}
+  .inline>*{width:100%!important;flex:auto!important}
+  .search{padding:10px!important}
+  .search input,.search button{width:100%}
+  h1{line-height:1.15}
+  h2{font-size:22px}
+  h3{line-height:1.25}
+}
+@media(max-width:380px){
+  main,.wrap{padding:12px!important}
+  .hero{padding:20px!important;border-radius:18px}
+  .top,.nav{padding:12px!important}
+}
+
+</style></head><body><main class="box"><div class="brand">StayFlow</div><h1>Welcome back</h1><p class="sub">Sign in to manage your stays.</p>{% if error %}<div class="error">{{error}}</div>{% endif %}<form method="post"><label>Username</label><input name="username" autocomplete="username" required><label>Password</label><input name="password" type="password" autocomplete="current-password" required><button>Sign in</button></form><div class="demo"><b>Demo accounts</b><br>Admin: admin / admin123<br>Manager: manager / manager123<br>Guest: guest / guest123</div></main></body></html>

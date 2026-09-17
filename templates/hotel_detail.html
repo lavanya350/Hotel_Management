@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StayFlow · {{ hotel.name }}</title>
+<style>
+:root{--ink:#172033;--muted:#64748b;--line:#e5e7eb;--blue:#2563eb;--bg:#f7f9fc}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui;background:var(--bg);color:var(--ink)}
+a{text-decoration:none;color:inherit}.nav{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 6%;position:sticky;top:0;z-index:3}
+.brand{font-size:24px;font-weight:900;color:#1d4ed8}.nav a{padding:9px 13px}.btn{background:var(--blue);color:#fff;border-radius:9px;font-weight:800}
+.wrap{max-width:1200px;margin:auto;padding:25px}.back{color:#2563eb;font-weight:700}.hero{display:grid;grid-template-columns:1.25fr 1fr;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;margin:18px 0}
+.hero img,.hero .placeholder{width:100%;height:330px;object-fit:cover;background:linear-gradient(135deg,#dbeafe,#e2e8f0)}
+.info{padding:30px}.stars{color:#f59e0b}.muted{color:var(--muted)}.stats{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.pill{background:#eff6ff;color:#1d4ed8;padding:8px 11px;border-radius:999px;font-size:13px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.room{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}.room img,.room .placeholder{width:100%;height:180px;object-fit:cover;background:#e2e8f0}.room-body{padding:17px}.price{font-size:21px;font-weight:900;margin:12px 0}.amenities{color:var(--muted);font-size:14px;min-height:40px}
+button{width:100%;padding:12px;border:0;border-radius:9px;background:var(--blue);color:#fff;font-weight:800;cursor:pointer}.notice{padding:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;margin:15px 0}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.hero img,.hero .placeholder{height:260px}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.wrap{padding:16px}.grid{grid-template-columns:1fr}.info{padding:20px}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="brand">StayFlow</div><div><a href="{{ url_for("guest_dashboard") if session.get("role")=="guest" else "/" }}">← Hotels</a>{% if session.get("role")=="guest" %}<a class="btn" href="{{url_for("guest_dashboard")}}">My dashboard</a>{% else %}<a class="btn" href="/login">Sign in to book</a>{% endif %}</div></header>
+<main class="wrap">
+<a class="back" href="/">← Back to hotels</a>
+
+<section class="hero">
+  {% if hotel.image %}<img src="{{ url_for('public_media', filename=hotel.image) }}" alt="{{ hotel.name }}">
+  {% else %}<div class="placeholder"></div>{% endif %}
+  <div class="info">
+    <div class="stars">★ {{ "%.1f"|format(hotel.rating or 4.5) }}</div>
+    <h1>{{ hotel.name }}</h1>
+    <div class="muted">{{ hotel.location }}</div>
+    <p>{{ hotel.description or 'A comfortable StayFlow property.' }}</p>
+    <div class="stats">
+      <span class="pill">{{ stats.total_rooms }} total rooms</span>
+      <span class="pill">{{ stats.available_rooms }} available now</span>
+    </div>
+    <p class="muted">Choose a room below. {% if session.get("role")=="guest" %}Select your dates and reserve an available room.{% else %}Sign in as a guest to complete a reservation.{% endif %}</p>
+  </div>
+</section>
+
+<h2>Rooms in {{ hotel.name }}</h2>
+<div class="grid">
+{% for r in rooms %}
+  <article class="room">
+    {% if r.image %}<img src="{{ url_for('public_media', filename=r.image) }}" alt="Room {{ r.room_number }}">
+    {% else %}<div class="placeholder"></div>{% endif %}
+    <div class="room-body">
+      <h3>Room {{ r.room_number }} · {{ r.room_type }}</h3>
+      <div class="amenities">{{ r.amenities or 'Wi-Fi · Housekeeping · Comfortable bedding' }}</div>
+      <div class="price">₹{{ "%.2f"|format(r.price) }} <span class="muted" style="font-size:12px">/ night</span></div>
+      {% if r.available %}
+        <span class="pill">Available</span>
+        {% if session.get("role")=="guest" %}
+        <form method="post" action="{{url_for('book',room_id=r.id)}}" style="margin-top:12px;display:grid;gap:7px;">
+          <input type="date" name="check_in" required>
+          <input type="date" name="check_out" required>
+          <button>Reserve this room</button>
+        </form>
+        {% endif %}
+      {% else %}
+        <span class="pill" style="background:#fee2e2;color:#991b1b">Currently occupied</span>
+      {% endif %}
+    </div>
+  </article>
+{% else %}
+  <div class="notice">This hotel has no rooms added yet.</div>
+{% endfor %}
+</div>
+</main>
+</body>
+</html>

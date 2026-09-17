@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StayFlow · Admin</title><style>
+:root{--bg:#f6f8fc;--panel:#fff;--ink:#172033;--muted:#64748b;--line:#e5e7eb;--primary:#4f46e5;--danger:#dc2626;--green:#059669;--amber:#d97706}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui;color:var(--ink)}a{text-decoration:none;color:inherit}.top{height:70px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:5}.brand{font-size:22px;font-weight:900}.top a{color:#c7d2fe}.layout{display:grid;grid-template-columns:230px 1fr}aside{background:#fff;border-right:1px solid var(--line);min-height:calc(100vh - 70px);padding:20px;position:sticky;top:70px;height:calc(100vh - 70px)}nav a{display:block;padding:12px;border-radius:10px;color:#475569;margin:4px 0}nav a:hover{background:#eef2ff;color:#4338ca}main{padding:28px;max-width:1550px;width:100%}.hero{display:flex;justify-content:space-between;margin-bottom:22px}.hero h1{margin:0;font-size:30px}.muted{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 25px #0f172a08}.stat b{display:block;font-size:28px;margin-top:6px}.panel{margin-bottom:20px}.panel h2{margin-top:0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}label{font-size:12px;color:var(--muted);display:block;margin:5px 0}input,select,textarea,button{width:100%;font:inherit;border:1px solid var(--line);border-radius:9px;padding:10px;background:#fff}textarea{min-height:70px}button{background:var(--primary);color:#fff;border:0;font-weight:800;cursor:pointer}.danger{background:var(--danger)}.green{background:var(--green)}.amber{background:var(--amber)}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:900px}th,td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:11px;color:var(--muted);text-transform:uppercase}.thumb{width:70px;height:52px;object-fit:cover;border-radius:8px}.actions{display:grid;gap:6px}.inline{display:flex;gap:6px}.flash{padding:12px;border-radius:11px;margin-bottom:14px;background:#dcfce7;color:#166534}.error{background:#fee2e2;color:#991b1b}.pill{display:inline-block;padding:4px 8px;border-radius:99px;background:#eef2ff;color:#4338ca;font-size:11px;font-weight:800}@media(max-width:1000px){.layout{grid-template-columns:1fr}aside{display:none}.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+
+
+/* Responsive polish: prevent text collisions and improve touch/mobile layouts */
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden}
+h1,h2,h3,p,small,td,th,label,.muted,.badge,.pill{overflow-wrap:anywhere;word-break:break-word}
+button,input,select,textarea{min-width:0;max-width:100%}
+button{min-height:42px;line-height:1.25;white-space:normal}
+textarea{resize:vertical;line-height:1.4}
+input,select{line-height:1.35}
+.panel,.card,.stat,.booking,.body,.formgrid,.grid,.layout,main,aside{min-width:0}
+.tablewrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+table{table-layout:auto}
+th,td{overflow-wrap:anywhere;word-break:break-word}
+.actions{min-width:0}
+.inline{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.inline>*{min-width:0;flex:1 1 140px}
+.inline button{flex:0 1 auto}
+form{min-width:0}
+@media(max-width:1200px){
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .hero{gap:16px;flex-wrap:wrap}
+}
+@media(max-width:900px){
+  .top,.nav{height:auto;min-height:68px;gap:12px;flex-wrap:wrap;padding:14px 20px!important}
+  .top>div,.nav>div{min-width:0}
+  main,.wrap{padding:20px!important}
+  .grid{grid-template-columns:1fr!important}
+  .formgrid{grid-template-columns:1fr!important}
+  .full{grid-column:auto!important}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .search{grid-template-columns:1fr!important}
+  .hero{padding:28px!important;margin-left:0;margin-right:0}
+  .hero h1{font-size:clamp(30px,7vw,44px)!important}
+  .section-head{align-items:flex-start;gap:12px;flex-wrap:wrap}
+}
+@media(max-width:600px){
+  .brand{font-size:20px!important}
+  .top>div:last-child,.nav>div:last-child{font-size:13px}
+  .stats{grid-template-columns:1fr!important}
+  .stat b{font-size:24px}
+  .panel{padding:15px!important;border-radius:14px}
+  .card .body{padding:14px}
+  .cover{height:190px!important}
+  .booking{display:grid;grid-template-columns:1fr!important;gap:12px!important;padding:16px 0!important}
+  .dates{display:grid!important;grid-template-columns:1fr!important}
+  .dates input{width:100%!important}
+  .inline{display:grid!important;grid-template-columns:1fr!important}
+  .inline>*{width:100%!important;flex:auto!important}
+  .search{padding:10px!important}
+  .search input,.search button{width:100%}
+  h1{line-height:1.15}
+  h2{font-size:22px}
+  h3{line-height:1.25}
+}
+@media(max-width:380px){
+  main,.wrap{padding:12px!important}
+  .hero{padding:20px!important;border-radius:18px}
+  .top,.nav{padding:12px!important}
+}
+
+</style></head><body><header class="top"><div class="brand">StayFlow · Admin Console</div><div>{{session.username}} · <a href="/logout">Sign out</a></div></header><div class="layout"><aside><nav><a href="#overview">Overview</a><a href="#hotels">Hotels & managers</a><a href="#users">Users</a><a href="#bookings">Bookings</a><a href="#requests">Cancellation requests</a></nav></aside><main>
+{% with msgs=get_flashed_messages(with_categories=true) %}{% for cat,msg in msgs %}<div class="flash {{'error' if cat=='error' else ''}}">{{msg}}</div>{% endfor %}{% endwith %}
+<section id="overview" class="hero"><div><h1>Platform operations</h1><p class="muted">Control properties, staff, reservations and service requests.</p></div></section>
+<div class="stats"><div class="stat">Hotels<b>{{stats.hotels}}</b></div><div class="stat">Rooms<b>{{stats.rooms}}</b></div><div class="stat">Users<b>{{stats.users}}</b></div><div class="stat">Bookings<b>{{stats.bookings}}</b></div><div class="stat">Pending requests<b>{{stats.pending}}</b></div></div>
+<section id="hotels" class="panel"><h2>Properties & manager assignment</h2><div class="grid"><form method="post" action="/admin/hotel/add" enctype="multipart/form-data"><div class="formgrid"><div><label>Hotel name</label><input name="name" required></div><div><label>Location</label><input name="location" required></div><div><label>Rating</label><input name="rating" type="number" min="1" max="5" step="0.1" value="4.5"></div><div><label>Image</label><input name="image" type="file" accept="image/*"></div><div class="full"><label>Description</label><textarea name="description"></textarea></div><div class="full"><button>Create property</button></div></div></form><div class="muted">Every property can be assigned to one manager. The manager then owns room inventory and booking/cancellation operations for that hotel.</div></div><div class="tablewrap"><table><tr><th>Hotel</th><th>Manager</th><th>Inventory</th><th>Bookings</th><th>Update property</th></tr>{% for h in hotels %}<tr><td>{% if h.image %}<img class="thumb" src="/admin/media/{{h.image}}"><br>{% endif %}<b>{{h.name}}</b><div class="muted">{{h.location}}</div><span class="pill">★ {{"%.1f"|format(h.rating or 4.5)}}</span></td><td><form method="post" action="/admin/hotel/{{h.id}}/assign" class="inline"><select name="manager_id"><option value="">Unassigned</option>{% for m in managers %}<option value="{{m.id}}" {{'selected' if h.manager_id==m.id}}>{{m.username}}</option>{% endfor %}</select><button>Assign</button></form></td><td>{{h.room_count}} rooms</td><td>{{h.booking_count}}</td><td><form method="post" action="/admin/hotel/{{h.id}}/update" enctype="multipart/form-data" class="actions"><input name="name" value="{{h.name}}" required><input name="location" value="{{h.location}}" required><input name="rating" value="{{h.rating or 4.5}}" type="number" min="1" max="5" step="0.1"><textarea name="description">{{h.description or ''}}</textarea><input name="image" type="file" accept="image/*"><button>Save changes</button></form><form method="post" action="/admin/hotel/{{h.id}}/delete" onsubmit="return confirm('Delete property and its rooms?')"><button class="danger">Delete property</button></form></td></tr>{% else %}<tr><td colspan="5" class="muted">No properties yet.</td></tr>{% endfor %}</table></div></section>
+<section id="users" class="panel"><h2>Users & staff</h2><form method="post" action="/admin/user/add" class="formgrid"><div><label>Username</label><input name="username" required></div><div><label>Temporary password</label><input name="password" required></div><div><label>Role</label><select name="role"><option>manager</option><option>guest</option><option>admin</option></select></div><div><label>&nbsp;</label><button>Create account</button></div></form><div class="tablewrap" style="margin-top:15px"><table><tr><th>ID</th><th>Username</th><th>Role</th><th>Manage</th></tr>{% for u in users %}<tr><td>#{{u.id}}</td><td>{{u.username}}</td><td><span class="pill">{{u.role}}</span></td><td><form method="post" action="/admin/user/{{u.id}}/update" class="inline"><input name="username" value="{{u.username}}" required><input name="password" placeholder="New password"><select name="role"><option {{'selected' if u.role=='admin'}}>admin</option><option {{'selected' if u.role=='manager'}}>manager</option><option {{'selected' if u.role=='guest'}}>guest</option></select><button>Save</button></form><form method="post" action="/admin/user/{{u.id}}/delete"><button class="danger">Delete</button></form></td></tr>{% endfor %}</table></div></section>
+<section id="bookings" class="panel"><h2>All reservations</h2><div class="tablewrap"><table><tr><th>Booking</th><th>Guest</th><th>Property / room</th><th>Dates</th><th>Status</th><th>Admin action</th></tr>{% for b in bookings %}<tr><td>#{{b.id}}</td><td>{{b.guest_name}}</td><td>{{b.hotel_name}}<br>Room {{b.room_number}}</td><td>{{b.check_in}} → {{b.check_out}}</td><td><span class="pill">{{b.status}}</span></td><td><form method="post" action="/admin/booking/{{b.id}}/update" class="actions"><input type="date" name="check_in" value="{{b.check_in}}"><input type="date" name="check_out" value="{{b.check_out}}"><select name="status"><option {{'selected' if b.status=='Booked'}}>Booked</option><option {{'selected' if b.status=='Checked-in'}}>Checked-in</option><option {{'selected' if b.status=='Checked-out'}}>Checked-out</option><option {{'selected' if b.status=='Cancelled'}}>Cancelled</option></select><button>Update</button></form></td></tr>{% else %}<tr><td colspan="6" class="muted">No reservations yet.</td></tr>{% endfor %}</table></div></section>
+<section id="requests" class="panel"><h2>Cancellation requests</h2><div class="tablewrap"><table><tr><th>Request</th><th>Guest</th><th>Hotel</th><th>Stay</th><th>Status</th><th>Reason / manager note</th></tr>{% for r in requests %}<tr><td>#{{r.id}}<br>Booking #{{r.booking_id}}</td><td>{{r.guest_name}}</td><td>{{r.hotel_name}}</td><td>{{r.check_in}} → {{r.check_out}}</td><td><span class="pill">{{r.status}}</span></td><td>{{r.reason or '—'}}{% if r.manager_note %}<br><small>Manager: {{r.manager_note}}</small>{% endif %}</td></tr>{% else %}<tr><td colspan="6" class="muted">No cancellation requests.</td></tr>{% endfor %}</table></div></section>
+</main></div></body></html>
